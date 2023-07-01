@@ -13,6 +13,9 @@ import React, { useCallback } from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CommentsScreen } from "./src/screens/CommentsScreen";
 import { MapScreen } from "./src/screens/MapScreen";
+import { store, persistor } from './src/redux/auth/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux'
 
 
 const MainStack = createStackNavigator();
@@ -36,8 +39,8 @@ export default function App() {
   }
 
   return (
-    // <Provider store={store}>
-    //   <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <SafeAreaView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <NavigationContainer >
         <MainStack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
@@ -51,8 +54,8 @@ export default function App() {
         </MainStack.Navigator>
       </NavigationContainer>
       </SafeAreaView>
-      // </PersistGate>
-      // </Provider>
+      </PersistGate>
+       </Provider>
     
   );
 }
