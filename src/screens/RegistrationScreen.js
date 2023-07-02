@@ -3,13 +3,8 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 // import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { 
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile
-} from 'firebase/auth';
-// import { auth } from './config';
+import {signUpUser} from '../redux/auth/operations';
+import { useDispatch } from "react-redux";
 
 import {
   View,
@@ -40,12 +35,21 @@ export const RegistrationScreen = () => {
   const screenHeight = Dimensions.get("window").height;
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleRegistration = () => {
     if (!loginValue || !emailValue || !passwordValue) {
       console.log("Please fill in all fields");
       return;
     }
+
+    dispatch(
+      signUpUser({
+        login: loginValue,
+        email: emailValue,
+        password: passwordValue,
+      })
+    );
 
     console.log("Логін:", loginValue);
     console.log("Електронна пошта:", emailValue);

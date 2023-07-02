@@ -68,10 +68,10 @@ export const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(signUpUser, handlePending)
+      .addCase(signUpUser.pending, handlePending)
       .addCase(signUpUser.fulfilled, handleFulfilled)
       .addCase(signUpUser.rejected, handleRejected)
-      .addCase(loginUser, handlePending)
+      .addCase(loginUser.pending, handlePending)
       .addCase(loginUser.fulfilled, handleFulfilled)
       .addCase(loginUser.rejected, handleRejected)
       .addCase(logoutUser.pending, handlePending)
